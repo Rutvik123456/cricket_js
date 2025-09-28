@@ -9,7 +9,94 @@
     <h1>CrickGame</h1>
     <button onclick="
         let userchoice=`Bat`;
-        var compchoice;
+        compChoicce ();
+        let scoree;
+    
+        
+        if(compchoice===`Bat`){
+            
+            scoree = `IT'S A TIE.`;
+            score.Tie++;
+
+        }
+        else if (compchoice === `Ball`){
+            
+            scoree = `Wohoo!YOU WIN.`;
+            score.Win++;
+            
+        }
+        else {
+
+            scoree = `Oops!You loose.`;
+            score.Lost++;
+        }
+    
+         alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
+           
+
+       console.log(score);
+        
+    ">Bat</button>
+    
+    
+    <button onclick="
+        userchoice=`Ball`;
+        compChoicce ();
+        	  
+        if(compchoice===`Bat`){
+            
+		  scoree = `Oops!You loose.`;
+            score.Lost++;
+}
+        else if (compchoice === `Ball`){
+             
+		   scoree = `IT'S A TIE.`;
+            score.Tie++;
+}
+        else {
+            
+           scoree = `Wohoo!YOU WIN.`;
+            score.Win++;
+            }
+           
+
+		alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
+           
+       console.log(score);
+    ">Ball</button>
+
+
+    <button onclick="
+        userchoice=`Stump`;
+        compChoicce ();
+        
+        if(compchoice===`Bat`){
+
+		   scoree = `Wohoo!YOU WIN.`;
+            score.Win++;
+        }
+        else if (compchoice === `Ball`){
+
+		    scoree = `Oops!You loose.`;
+            score.Lost++;
+        }
+        else {
+			scoree = `IT'S A TIE.`;
+			score.Tie++;
+        }
+			            
+            alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n{scoree}\n\n` + displayScore());
+
+            console.log(`user choose Stump`);
+    ">Stump</button>
+
+
+<script>
+
+    var compchoice;
+    
+    function compChoicce (){
+
         let compinput = Math.random() * 3;
 
         if(compinput<1){
@@ -18,65 +105,20 @@
             compchoice = `Ball`}
         else{
             compchoice = `Stump`}
+    }
 
-        if(compchoice===`Bat`){
-            alert(`You choose : Bat\nComputer choose : Bat\n\nIT'S A TIE`);}
-        else if (compchoice === `Ball`){
-            alert(`You choose : Bat\nComputer choose : Ball\n\nWohoo!YOU WIN.`);}
-        else {
-            alert(`You choose : Bat\nComputer choose : Stump\n\nOops!You loose.`);}
-    
-            console.log(`user choose Bat`);
-    ">Bat</button>
-    
-    
-    <button onclick="
-        userchoice=`Ball`;
-       
-        compinput = Math.random() * 3;
+    let score = {
+        Win : 0,
+        Lost : 0,
+        Tie : 0,
+    }
 
-        if(compinput<1){
-            compchoice = `Bat`}
-        else if(compinput>1 && compinput<2){
-            compchoice = `Ball`}
-        else{
-            compchoice = `Stump`}
+    function displayScore(){
 
-        if(compchoice===`Bat`){
-            alert(`You choose : Ball\nComputer choose : Bat\n\nOops!You loose.`);}
-        else if (compchoice === `Ball`){
-            alert(`You choose : Ball\nComputer choose : Ball\n\nIT'S A TIE`);}
-        else {
-            alert(`You choose : Ball\nComputer choose : Stump\n\nWohoo!YOU WIN.`);}
-    
-            console.log(`user choose Ball`);
-    ">Ball</button>
+        return `Win : ${score.Win}\nLost : ${score.Lost}\nTie : ${score.Tie}`;      
 
+    }
 
-    <button onclick="
-        userchoice=`Stump`;
-        
-        compinput = Math.random() * 3;
-
-        if(compinput<1){
-            compchoice = `Bat`}
-        else if(compinput>1 && compinput<2){
-            compchoice = `Ball`}
-        else{
-            compchoice = `Stump`}
-
-        if(compchoice===`Bat`){
-            alert(`You choose : Stump\nComputer choose : Bat\n\nWohoo!YOU WIN.`);}
-        else if (compchoice === `Ball`){
-            alert(`You choose : Stump\nComputer choose : Ball\n\nOops!You loose.`);}
-        else {
-            alert(`You choose : Stump\nComputer choose : Stump\n\nIT'S A TIE`);
-            }
-            console.log(`user choose Stump`);">Stump</button>
-
-
-
-
+</script>
 </body>
-
 </html>
