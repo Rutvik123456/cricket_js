@@ -3,97 +3,89 @@
 
 <head>
     <title>Cric</title>
+    <style>
+        img{
+            height: 100px;
+           
+        }
+
+        button{
+            color: green;
+            background-color: rgb(254, 255, 254);
+           border: 0px;
+            border-radius: 100px;
+            margin: 40px;
+            cursor: pointer;
+        }
+        button:hover{
+           color: red;
+        }
+
+        *{
+            text-align: center;
+        }
+
+     
+
+    
+    </style>
 </head>
 
 <body>
     <h1>CrickGame</h1>
     <button onclick="
-        let userchoice=`Bat`;
+         userchoice=`Bat`;
+        
         compChoicce ();
-        let scoree;
+        resultforuBat();        
+        Local();
+        // falert();  
+        scoreUI (); 
+            
     
         
-        if(compchoice===`Bat`){
-            
-            scoree = `IT'S A TIE.`;
-            score.Tie++;
-
-        }
-        else if (compchoice === `Ball`){
-            
-            scoree = `Wohoo!YOU WIN.`;
-            score.Win++;
-            
-        }
-        else {
-
-            scoree = `Oops!You loose.`;
-            score.Lost++;
-        }
-    
-         alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
-           
-
-       console.log(score);
-        
-    ">Bat</button>
+    "><img src="https://pngimg.com/uploads/cricket/cricket_PNG103.png" alt="bat"></button>
     
     
-    <button onclick="
+    <button  onclick="
         userchoice=`Ball`;
-        compChoicce ();
-        	  
-        if(compchoice===`Bat`){
+        compChoicce (); 	  
+        resultforuBall();
+        Local();
+        // falert() ;
+        scoreUI ();
             
-		  scoree = `Oops!You loose.`;
-            score.Lost++;
-}
-        else if (compchoice === `Ball`){
-             
-		   scoree = `IT'S A TIE.`;
-            score.Tie++;
-}
-        else {
-            
-           scoree = `Wohoo!YOU WIN.`;
-            score.Win++;
-            }
-           
-
-		alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
-           
-       console.log(score);
-    ">Ball</button>
+      
+    "><img src="https://www.freeiconspng.com/thumbs/tennis-ball-png/tennis-ball-png-picture-1.png" alt="ball"></button>
 
 
     <button onclick="
         userchoice=`Stump`;
         compChoicce ();
-        
-        if(compchoice===`Bat`){
+		resultforuStump();
+        Local();           
+        // falert();
+        scoreUI ();
+                    
+    "><img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREBglP8-cVl-9BjEUEkKNPFUj7SY__ySzBA&s" alt="stump"></button>
 
-		   scoree = `Wohoo!YOU WIN.`;
-            score.Win++;
-        }
-        else if (compchoice === `Ball`){
+    
 
-		    scoree = `Oops!You loose.`;
-            score.Lost++;
-        }
-        else {
-			scoree = `IT'S A TIE.`;
-			score.Tie++;
-        }
-			            
-            alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n{scoree}\n\n` + displayScore());
-
-            console.log(`user choose Stump`);
-    ">Stump</button>
-
+    <h3></h3> 
+    
+    
 
 <script>
-
-    var compchoice;
+    
+    let scoree = "";
+    let userchoice = "";
+    var compchoice = "";
+   
+    let score = {
+        Win : 0,
+        Lost : 0,
+        Tie : 0,
+    };
     
     function compChoicce (){
 
@@ -107,17 +99,123 @@
             compchoice = `Stump`}
     }
 
-    let score = {
-        Win : 0,
-        Lost : 0,
-        Tie : 0,
-    }
-
+   
     function displayScore(){
 
         return `Win : ${score.Win}\nLost : ${score.Lost}\nTie : ${score.Tie}`;      
 
     }
+
+    function Local(){
+        localStorage.setItem('ss',JSON.stringify(score))
+    }
+
+    function srefresh (){
+        
+       let  oldscore = localStorage.getItem('ss')
+       if(oldscore){score = JSON.parse(oldscore);}
+    }
+    srefresh();
+
+    function falert () {
+        scoreUI ();
+        alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
+    }
+
+                function resultforuBat(){
+                    if(compchoice===`Bat`){
+                        
+                        scoree = `IT'S A TIE.`;
+                        score.Tie++;
+
+                    }
+                    else if (compchoice === `Ball`){
+                        
+                        scoree = `Wohoo!YOU WIN.`;
+                        score.Win++;
+                        
+                    }
+                    else {
+
+                        scoree = `Oops!You loose.`;
+                        score.Lost++;
+                    }
+
+                }
+
+                function resultforuBall(){
+                            if(compchoice===`Bat`){
+                        
+                    scoree = `Oops!You loose.`;
+                        score.Lost++;
+            }
+                    else if (compchoice === `Ball`){
+                        
+                    scoree = `IT'S A TIE.`;
+                        score.Tie++;
+                    }
+                    else {
+                        
+                    scoree = `Wohoo!YOU WIN.`;
+                        score.Win++;
+                        }
+                }
+
+                function resultforuStump(){
+                            
+                    if(compchoice===`Bat`){
+
+                    scoree = `Wohoo!YOU WIN.`;
+                        score.Win++;
+                    }
+                    else if (compchoice === `Ball`){
+
+                        scoree = `Oops!You loose.`;
+                        score.Lost++;
+                    }
+                    else {
+                        scoree = `IT'S A TIE.`;
+                        score.Tie++;
+                    }
+
+                }
+
+    function resetbtn (){
+        let newbutton = document.createElement('button');
+        newbutton.innerHTML='NEW GAME';
+
+        let parentElement = document.querySelector('body');
+        parentElement.appendChild(newbutton);
+    
+        newbutton.onclick=function (){
+            
+         resetaction();
+         Local();
+        //  resetalert();
+         scoreUI();
+            
+        
+        }
+
+    }
+    resetbtn();
+
+            function resetaction(){
+                score.Win=0;
+                score.Lost=0;
+                score.Tie=0;
+                userchoice="";
+                compchoice="";
+            }
+             function resetalert () {
+                alert(`You choose NEW GAME \n\n\n\n` + displayScore());
+            }
+    
+     
+       function scoreUI () {document.querySelector('h3').innerText= `You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n ` + displayScore(); 
+        }
+        scoreUI();
+
 
 </script>
 </body>
