@@ -4,219 +4,252 @@
 <head>
     <title>Cric</title>
     <style>
-        img{
+        img {
             height: 100px;
-           
+
         }
 
-        button{
+        button {
             color: green;
             background-color: rgb(254, 255, 254);
-           border: 0px;
+            border: 0px;
             border-radius: 100px;
             margin: 40px;
             cursor: pointer;
         }
-        button:hover{
-           color: red;
+
+        button:hover {
+            color: red;
         }
 
-        *{
+        * {
             text-align: center;
         }
 
-     
+        .info {
+            float: center;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
 
-    
+        .info li {
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
-    <h1>CrickGame</h1>
-    <button onclick="
-         userchoice=`Bat`;
-        
-        compChoicce ();
-        resultforuBat();        
-        Local();
-        // falert();  
-        scoreUI (); 
-            
-    
-        
-    "><img src="https://pngimg.com/uploads/cricket/cricket_PNG103.png" alt="bat"></button>
-    
-    
-    <button  onclick="
-        userchoice=`Ball`;
-        compChoicce (); 	  
-        resultforuBall();
-        Local();
-        // falert() ;
-        scoreUI ();
-            
-      
-    "><img src="https://www.freeiconspng.com/thumbs/tennis-ball-png/tennis-ball-png-picture-1.png" alt="ball"></button>
+    <header>
+        <h1>CrickGame</h1>
+    </header>
+
+    <main>
+        <button onclick="batbtn();">
+            <img src="https://pngimg.com/uploads/cricket/cricket_PNG103.png" alt="bat">
+        </button>
 
 
-    <button onclick="
-        userchoice=`Stump`;
-        compChoicce ();
-		resultforuStump();
-        Local();           
-        // falert();
-        scoreUI ();
-                    
-    "><img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREBglP8-cVl-9BjEUEkKNPFUj7SY__ySzBA&s" alt="stump"></button>
+        <button onclick="ballbtn();">
+            <img src="https://www.freeiconspng.com/thumbs/tennis-ball-png/tennis-ball-png-picture-1.png" alt="ball">
+        </button>
 
-    
 
-    <h3></h3> 
-    
-    
+        <button onclick="stumpbtn();">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSREBglP8-cVl-9BjEUEkKNPFUj7SY__ySzBA&s"
+                alt="stump">
+        </button>
 
-<script>
-    
-    let scoree = "";
-    let userchoice = "";
-    var compchoice = "";
-   
-    let score = {
-        Win : 0,
-        Lost : 0,
-        Tie : 0,
-    };
-    
-    function compChoicce (){
 
-        let compinput = Math.random() * 3;
+        <h3 id="scoreboard"></h3>
+    </main>
 
-        if(compinput<1){
-            compchoice = `Bat`}
-        else if(compinput>1 && compinput<2){
-            compchoice = `Ball`}
-        else{
-            compchoice = `Stump`}
-    }
+    <footer>
+        <details class="info">
+            <summary><b>📖 How to play </b></summary>
+            <ul>
+                <li>Pick <b>Bat</b>, <b>Ball</b>, or <b>Stump</b> by tapping a button.</li>
+                <li>The computer picks one at random at the same time.</li>
+                <li>Winner is decided like rock-paper-scissors:
+                    <ul>
+                        <li>Bat beats Ball</li>
+                        <li>Ball beats Stump</li>
+                        <li>Stump beats Bat</li>
+                    </ul>
+                </li>
+                <li>Same choice from both = a Tie.</li>
+                <li>Your Win / Lost / Tie totals are saved automatically, even if you refresh the page.</li>
+                <li>Click <b>NEW GAME</b> at any time to reset the scoreboard.</li>
+            </ul>
+        </details>
+    </footer>
 
-   
-    function displayScore(){
 
-        return `Win : ${score.Win}\nLost : ${score.Lost}\nTie : ${score.Tie}`;      
+    <script>
 
-    }
+        let resultText = "";
+        let userchoice = "";
+        let compchoice = "";
 
-    function Local(){
-        localStorage.setItem('ss',JSON.stringify(score))
-    }
+        //creating object to store score and using local storage to store the score in browser memory so that it can be used even after refreshing the page.
+        let score = {
+            Win: 0,
+            Lost: 0,
+            Tie: 0,
+        };
 
-    function srefresh (){
-        
-       let  oldscore = localStorage.getItem('ss')
-       if(oldscore){score = JSON.parse(oldscore);}
-    }
-    srefresh();
-
-    function falert () {
-        scoreUI ();
-        alert(`You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n` + displayScore());
-    }
-
-                function resultforuBat(){
-                    if(compchoice===`Bat`){
-                        
-                        scoree = `IT'S A TIE.`;
-                        score.Tie++;
-
-                    }
-                    else if (compchoice === `Ball`){
-                        
-                        scoree = `Wohoo!YOU WIN.`;
-                        score.Win++;
-                        
-                    }
-                    else {
-
-                        scoree = `Oops!You loose.`;
-                        score.Lost++;
-                    }
-
-                }
-
-                function resultforuBall(){
-                            if(compchoice===`Bat`){
-                        
-                    scoree = `Oops!You loose.`;
-                        score.Lost++;
-            }
-                    else if (compchoice === `Ball`){
-                        
-                    scoree = `IT'S A TIE.`;
-                        score.Tie++;
-                    }
-                    else {
-                        
-                    scoree = `Wohoo!YOU WIN.`;
-                        score.Win++;
-                        }
-                }
-
-                function resultforuStump(){
-                            
-                    if(compchoice===`Bat`){
-
-                    scoree = `Wohoo!YOU WIN.`;
-                        score.Win++;
-                    }
-                    else if (compchoice === `Ball`){
-
-                        scoree = `Oops!You loose.`;
-                        score.Lost++;
-                    }
-                    else {
-                        scoree = `IT'S A TIE.`;
-                        score.Tie++;
-                    }
-
-                }
-
-    function resetbtn (){
-        let newbutton = document.createElement('button');
-        newbutton.innerHTML='NEW GAME';
-
-        let parentElement = document.querySelector('body');
-        parentElement.appendChild(newbutton);
-    
-        newbutton.onclick=function (){
-            
-         resetaction();
-         Local();
-        //  resetalert();
-         scoreUI();
-            
-        
+        function Local() {
+            localStorage.setItem('ss', JSON.stringify(score))
         }
 
-    }
-    resetbtn();
-
-            function resetaction(){
-                score.Win=0;
-                score.Lost=0;
-                score.Tie=0;
-                userchoice="";
-                compchoice="";
-            }
-             function resetalert () {
-                alert(`You choose NEW GAME \n\n\n\n` + displayScore());
-            }
-    
-     
-       function scoreUI () {document.querySelector('h3').innerText= `You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${scoree}\n\n ` + displayScore(); 
+        //function to refresh the score from local storage when page is refreshed or opened again.
+        function refresh() {
+            let oldscore = localStorage.getItem('ss')
+            if (oldscore) { score = JSON.parse(oldscore); }
         }
-        scoreUI();
+        refresh();
+
+        //function to display the score in the UI.
+        function displayScore() {
+            return `Win : ${score.Win}\nLost : ${score.Lost}\nTie : ${score.Tie}`;
+        }
+
+        //function to generate computer choice randomly.
+
+        function getCompChoice() {
+
+            let compinput = Math.random() * 3;
+
+            if (compinput < 1) {
+                compchoice = `Bat`
+            }
+            else if (compinput > 1 && compinput < 2) {
+                compchoice = `Ball`
+            }
+            else {
+                compchoice = `Stump`
+            }
+        }
+
+        //function to check the result of the game based on user choice and computer choice.
+
+        function resultforuBat() {
+
+            if (compchoice === `Bat`) {
+                resultText = `IT'S A TIE.`;
+                score.Tie++;
+            }
+
+            else if (compchoice === `Ball`) {
+                resultText = `Wohoo!YOU WIN.`;
+                score.Win++;
+            }
+
+            else {
+                resultText = `Oops!You loose.`;
+                score.Lost++;
+            }
+
+        }
 
 
-</script>
+        function resultforuBall() {
+
+            if (compchoice === `Bat`) {
+                resultText = `Oops!You loose.`;
+                score.Lost++;
+            }
+
+            else if (compchoice === `Ball`) {
+                resultText = `IT'S A TIE.`;
+                score.Tie++;
+            }
+
+            else {
+                resultText = `Wohoo!YOU WIN.`;
+                score.Win++;
+            }
+        }
+
+
+        function resultforuStump() {
+
+            if (compchoice === `Bat`) {
+                resultText = `Wohoo!YOU WIN.`;
+                score.Win++;
+            }
+            else if (compchoice === `Ball`) {
+
+                resultText = `Oops!You loose.`;
+                score.Lost++;
+            }
+            else {
+                resultText = `IT'S A TIE.`;
+                score.Tie++;
+            }
+
+        }
+
+        //function to update the UI with the current score and choices.
+        function updateScoreboard() {
+            document.querySelector('#scoreboard').innerText = `You choose : ${userchoice}\nComputer choose : ${compchoice}\n\n${resultText}\n\n ` + displayScore();
+        }
+        updateScoreboard();
+
+        //functions to handle the button clicks. 
+
+        function batbtn() {
+            userchoice = `Bat`;
+            getCompChoice();
+            resultforuBat();
+            Local();
+            updateScoreboard();
+        }
+
+        function ballbtn() {
+            userchoice = `Ball`;
+            getCompChoice();
+            resultforuBall();
+            Local();
+            updateScoreboard();
+        }
+
+        function stumpbtn() {
+            userchoice = `Stump`;
+            getCompChoice();
+            resultforuStump();
+            Local();
+            updateScoreboard();
+        }
+
+        //function to create a new game button and reset the score and choices when clicked.
+        function resetbtn() {
+            let newbutton = document.createElement('button');
+            newbutton.innerHTML = 'NEW GAME';
+
+            let parentElement = document.querySelector('main');
+            parentElement.appendChild(newbutton);
+
+            newbutton.onclick = function () {
+                resetaction();
+                Local();
+                updateScoreboard();
+            }
+
+        }
+        resetbtn();
+
+        function resetaction() {
+            score.Win = 0;
+            score.Lost = 0;
+            score.Tie = 0;
+            userchoice = "";
+            compchoice = "";
+        }
+
+    </script>
 </body>
+
 </html>
